@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BattleUnit : MonoBehaviour
 {
+    public GameObject _bodyPrefab;
+
     public float MaxHP;
 
     [HideInInspector]
@@ -17,12 +19,18 @@ public class BattleUnit : MonoBehaviour
         HP = MaxHP;
     }
 
+    public GameObject GetBodyPrefab()
+    {
+        return _bodyPrefab;
+    }
+
     public void Hurt(BattleUnit from)
     {
         HP -= from.Atk;
 
         if (HP <= 0)
         {
+            Messenger.Broadcast<BattleUnit>("CreateBody", this);
             Destroy(gameObject);
         }
 
