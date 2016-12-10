@@ -41,8 +41,11 @@ public class BulletBehaviour : MonoBehaviour
             var com = other.GetComponent<BattleUnit>();
             if (com != null)
             {
-                com.Hurt(Owner);
-                Destroy(gameObject);
+                if (Owner.tag != other.gameObject.tag)
+                {
+                    com.Hurt(Owner);
+                    Destroy(gameObject);
+                }
             }
         }
     }
