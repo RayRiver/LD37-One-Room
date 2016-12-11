@@ -337,7 +337,14 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator GameLoop()
     {
-        _gears = 0;
+        if (CheatMode.On)
+        {
+            _gears = 99;
+        }
+        else
+        {
+            _gears = 0;
+        }
         Messenger.Broadcast<int>("UIUpdateGears", _gears);
         foreach (var s in _skills)
         {

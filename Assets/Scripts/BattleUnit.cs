@@ -33,6 +33,12 @@ public class BattleUnit : MonoBehaviour
         {
             Messenger.AddListener("GetHeart", OnGetHeart);
             Messenger.AddListener<string, float>("SkillLevelUpFinished", OnSkillLevelUpFinished);
+
+            if (CheatMode.On)
+            {
+                MaxHP = 99;
+                HP = MaxHP;
+            }
         }
     }
 

@@ -18,7 +18,7 @@ public class BattleUI : MonoBehaviour
     public Button _skill3Button;
     public Button _skill4Button;
 
-    void Start()
+    void Awake()
     {
         Messenger.AddListener<bool>("GameResult", OnGameResult);
         Messenger.AddListener<int>("UIUpdateGears", OnUIUpdateGears);
