@@ -21,7 +21,8 @@ public class BulletBehaviour : MonoBehaviour
     private ObjectMovement _objectMovement;
     private AudioSource _audioSource;
 
-    public BattleUnit Owner;
+    public string OwnerTag;
+    public float OwnerAtk;
 
     void Awake()
     {
@@ -47,9 +48,9 @@ public class BulletBehaviour : MonoBehaviour
             var com = other.GetComponent<BattleUnit>();
             if (com != null)
             {
-                if (Owner.tag != other.gameObject.tag)
+                if (OwnerTag != other.gameObject.tag)
                 {
-                    com.Hurt(Owner);
+                    com.Hurt(OwnerTag, OwnerAtk);
                     Messenger.Broadcast<string, Vector3>("PlaySfx", "Hit", transform.position);
                     Destroy(gameObject);
                 }

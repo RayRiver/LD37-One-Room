@@ -11,6 +11,7 @@ public class BattleUI : MonoBehaviour
     public GameObject _loseText;
 
     public Text _gearText;
+    public Text _healthText;
 
     public Button _skill1Button;
     public Button _skill2Button;
@@ -20,6 +21,7 @@ public class BattleUI : MonoBehaviour
     {
         Messenger.AddListener<bool>("GameResult", OnGameResult);
         Messenger.AddListener<int>("UIUpdateGears", OnUIUpdateGears);
+        Messenger.AddListener<float, float>("UIUpdateHealth", OnUIUpdateHealth);
         Messenger.AddListener<GameManager.Skill, int, bool>("UIUpdateSkill", OnUIUpdateSkill);
     }
 
@@ -34,6 +36,14 @@ public class BattleUI : MonoBehaviour
         if (_gearText != null)
         {
             _gearText.text = gears.ToString();
+        }
+    }
+
+    void OnUIUpdateHealth(float hp, float maxhp)
+    {
+        if (_healthText != null)
+        {
+            _healthText.text = hp.ToString() + " / " + maxhp.ToString();
         }
     }
 

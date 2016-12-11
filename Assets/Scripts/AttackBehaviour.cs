@@ -22,7 +22,8 @@ public class AttackBehaviour : MonoBehaviour
         var com = bullet.GetComponent<BulletBehaviour>();
         if (com != null)
         {
-            com.Owner = _unit;
+            com.OwnerTag = _unit.tag;
+            com.OwnerAtk = _unit.Atk;
             com.Direction = Vector2.up;
         }
 

@@ -29,6 +29,33 @@ public class BattleUnit : MonoBehaviour
     void Awake()
     {
         HP = MaxHP;
+
+        if (tag == "Player")
+        {
+            Messenger.AddListener("GetHeart", OnGetHeart);
+        }
+    }
+
+    void Start()
+    {     
+        if (tag == "Player")
+        {
+            Messenger.Broadcast<float, float>("UIUpdateHealth", HP, MaxHP);
+        }
+    }
+
+    void OnGetHeart()
+    {
+        if (tag == "Player")
+        {
+            HP++;
+            if (HP > MaxHP)
+            {
+                HP = MaxHP;
+            }
+
+            Messenger.Broadcast<float, float>("UIUpdateHealth", HP, MaxHP);
+        }
     }
 
     public GameObject GetBodyPrefab()
@@ -41,9 +68,9 @@ public class BattleUnit : MonoBehaviour
         return _bodyFadeTime;
     }
 
-    public void Hurt(BattleUnit from)
+    public void Hurt(string ownerTag, float atk)
     {
-        HP -= from.Atk;
+        HP -= atk;
 
         if (HP <= 0)
         {
@@ -71,9 +98,18 @@ public class BattleUnit : MonoBehaviour
                 }
             }
 
+            if (tag == "Player")
+            {
+                Messenger.Broadcast("PlayerDead");
+            }
+
             Messenger.Broadcast<BattleUnit>("CreateBody", this);
             Destroy(gameObject);
         }
 
+        if (tag == "Player")
+        {
+            Messenger.Broadcast<float, float>("UIUpdateHealth", HP, MaxHP);
+        }
     }
 }

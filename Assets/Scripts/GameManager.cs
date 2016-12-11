@@ -38,6 +38,7 @@ public class GameManager : Singleton<GameManager>
 
     void Awake()
     {
+        Messenger.AddListener("PlayerDead", OnPlayerDead);
         Messenger.AddListener("GetGear", OnGetGear);
         Messenger.AddListener<string>("SkillLevelUp", OnSkillLevelUp);
     }
@@ -110,6 +111,12 @@ public class GameManager : Singleton<GameManager>
         {
             UpdateSkill(skill.id);
         }
+    }
+
+    void OnPlayerDead()
+    {
+        _gameOver = true;
+        _win = false;
     }
 
     void OnSkillLevelUp(string id)
