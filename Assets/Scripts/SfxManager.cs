@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SfxManager : MonoBehaviour
 {
+    [Range(0, 1)]
+    public float _volumn = 1;
+
     public GameObject _audioSourcePrefab;
     public AudioClip[] _audios;
 
@@ -35,6 +38,7 @@ public class SfxManager : MonoBehaviour
             {
                 audioSource.clip = clip;
                 audioSource.Play();
+                audioSource.volume *= _volumn;
                 StartCoroutine(AudioPlayCallback(audioSource, clip.length));
             }
         }
