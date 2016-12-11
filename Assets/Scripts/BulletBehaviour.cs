@@ -39,7 +39,7 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (other.tag == "Wall")
         {
-            Messenger.Broadcast<string, Vector3>("PlaySfx", "HitStatic", transform.position);
+            //Messenger.Broadcast<string, Vector3>("PlaySfx", "HitStatic", transform.position);
             Destroy(gameObject);
         }
         else

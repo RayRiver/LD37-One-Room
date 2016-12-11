@@ -5,6 +5,7 @@ using UnityEngine;
 public class BattleUnit : MonoBehaviour
 {
     public GameObject _bodyPrefab;
+    public float _bodyFadeTime = 0;
 
     public float MaxHP;
 
@@ -22,6 +23,11 @@ public class BattleUnit : MonoBehaviour
     public GameObject GetBodyPrefab()
     {
         return _bodyPrefab;
+    }
+
+    public float GetBodyFadeTime()
+    {
+        return _bodyFadeTime;
     }
 
     public void Hurt(BattleUnit from)
