@@ -145,6 +145,7 @@ public class GameManager : Singleton<GameManager>
             _skillLevels[skill.id]++;
             _gears -= skillLevel.cost;
             Messenger.Broadcast<int>("UIUpdateGears", _gears);
+            Messenger.Broadcast<string, Vector3>("PlaySfx", "LevelUp", Vector3.zero);
         }
 
         UpdateSkill(skill.id);
