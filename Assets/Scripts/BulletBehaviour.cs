@@ -50,7 +50,13 @@ public class BulletBehaviour : MonoBehaviour
             {
                 if (OwnerTag != other.gameObject.tag)
                 {
-                    com.Hurt(OwnerTag, OwnerAtk);
+                    var atk = OwnerAtk;
+                    if (OwnerTag == "Player")
+                    {
+                        atk += atk * GameManager.Instance.GetSkillEffect("power");
+                    }
+
+                    com.Hurt(OwnerTag, atk);
                     Messenger.Broadcast<string, Vector3>("PlaySfx", "Hit", transform.position);
                     Destroy(gameObject);
                 }
