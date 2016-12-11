@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
-    public float _decrease = 0.002f;
+    public float _decreasePerSecond = 1;
 
     private float _intensity = 0;
     private bool _shaking = false;
@@ -13,10 +13,10 @@ public class CameraShake : MonoBehaviour
 
     void Awake()
     {
-        Messenger.AddListener<float>("CameraShake", OnCameraShake);
+        Messenger.AddListener<float, float>("CameraShake", OnCameraShake);
     }
 
-    void OnCameraShake(float intensity = 1)
+    void OnCameraShake(float intensity, float time)
     {
         intensity = Mathf.Clamp01(intensity);
         _intensity = intensity;
@@ -27,6 +27,7 @@ public class CameraShake : MonoBehaviour
             _originRotation = transform.rotation;
         }
         _shaking = true;
+        _decreasePerSecond = intensity / time;
     }
 
     void Update()
@@ -39,7 +40,7 @@ public class CameraShake : MonoBehaviour
                 _originRotation.y + Random.Range(-_intensity, _intensity) * .2f,
                 _originRotation.z + Random.Range(-_intensity, _intensity) * .2f,
                 _originRotation.w + Random.Range(-_intensity, _intensity) * .2f);
-            _intensity -= _decrease;
+            _intensity -= (_decreasePerSecond * Time.deltaTime);
 
             if (_intensity <= 0)
             {

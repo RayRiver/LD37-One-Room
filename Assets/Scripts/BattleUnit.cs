@@ -96,7 +96,7 @@ public class BattleUnit : MonoBehaviour
             if (!string.IsNullOrEmpty(_explosionAudioName))
             {
                 Messenger.Broadcast<string, Vector3>("PlaySfx", _explosionAudioName, transform.position);
-                Messenger.Broadcast<float>("CameraShake", 0.05f);
+                Messenger.Broadcast<float, float>("CameraShake", 0.05f, 0.2f);
             }
 
             // create drop item;
@@ -125,7 +125,7 @@ public class BattleUnit : MonoBehaviour
         if (tag == "Player")
         {
             Messenger.Broadcast<float, float>("UIUpdateHealth", HP, MaxHP);
-            Messenger.Broadcast<float>("CameraShake", 0.03f);
+            Messenger.Broadcast<float, float>("CameraShake", 0.03f, 0.2f);
         }
     }
 }
