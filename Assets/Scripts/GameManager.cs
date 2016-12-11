@@ -75,6 +75,11 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public bool IsGameOver()
+    {
+        return _gameOver;
+    }
+
     void UpdateSkill(string id)
     {
         // find skill;
@@ -121,6 +126,8 @@ public class GameManager : Singleton<GameManager>
 
     void OnSkillLevelUp(string id)
     {
+        if (IsGameOver()) return;
+
         // find skill;
         var skill = _skillDict[id];
         if (skill == null)
