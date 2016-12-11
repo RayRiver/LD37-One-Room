@@ -14,15 +14,15 @@ public class WaveTextBehaviour : MonoBehaviour
 
     void Start()
     {
-        Messenger.AddListener<int>("WaveStart", OnWaveStart);
+        Messenger.AddListener<int, int>("WaveStart", OnWaveStart);
         Messenger.AddListener<bool>("GameResult", OnGameResult);
     }
 
-    void OnWaveStart(int wave)
+    void OnWaveStart(int wave, int maxWave)
     {
         if (_text != null)
         {
-            _text.text = "Wave " + wave.ToString();
+            _text.text = "Wave  " + wave.ToString() + "/" + maxWave.ToString();
         }
     }
 

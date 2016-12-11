@@ -211,7 +211,7 @@ public class GameManager : Singleton<GameManager>
 
                 Debug.Log("wave " + _wave);
 
-                Messenger.Broadcast<int>("WaveStart", _wave + 1);
+                Messenger.Broadcast<int, int>("WaveStart", _wave + 1, Waves.Length);
 
                 yield return Waves[_wave]();
             }
