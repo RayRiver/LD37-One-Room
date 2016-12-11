@@ -38,14 +38,15 @@ public class EffectManager : MonoBehaviour
             if (animator != null)
             {
                 animator.Play("Effect");
-                //StartCoroutine(AnimationCallback(animation, animation.clip.length));
+                var clips = animator.GetCurrentAnimatorClipInfo(0);
+                StartCoroutine(AnimationCallback(animator, clips[0].clip.length));
             }
         }
     }
 
-    IEnumerator AnimationCallback(Animation animation, float time)
+    IEnumerator AnimationCallback(Animator animator, float time)
     {
         yield return new WaitForSeconds(time);
-        //Destroy(animation.gameObject);
+        Destroy(animator.gameObject);
     }
 }
