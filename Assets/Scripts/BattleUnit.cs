@@ -11,6 +11,15 @@ public class BattleUnit : MonoBehaviour
 
     public float MaxHP;
 
+    [System.Serializable]
+    public struct DropItem
+    {
+        public string id;
+        [Range(0, 1)]
+        public float rate;
+    }
+    public DropItem[] _dropItems;
+
     [HideInInspector]
     public float HP;
 
@@ -46,6 +55,20 @@ public class BattleUnit : MonoBehaviour
             if (!string.IsNullOrEmpty(_explosionAudioName))
             {
                 Messenger.Broadcast<string, Vector3>("PlaySfx", _explosionAudioName, transform.position);
+            }
+
+            // create drop item;
+            if (_dropItems != null)
+            {
+                float n = Random.Range(0, 1);
+                foreach (var item in _dropItems)
+                {
+                    if (n < item.rate)
+                    {
+                        Messenger.Broadcast<string, Vector3>("DropItem", item.id, transform.position);
+                        break;
+                    }
+                }
             }
 
             Messenger.Broadcast<BattleUnit>("CreateBody", this);

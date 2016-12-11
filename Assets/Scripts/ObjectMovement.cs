@@ -39,7 +39,15 @@ public class ObjectMovement : MonoBehaviour
             _velocity.y = MovingDirection.y;
             _velocity.Normalize();
 
-            _controller.Move(_velocity * _speed *Time.deltaTime);
+            Vector3 dir = _velocity * _speed * Time.deltaTime;
+
+            if (tag == "Player")
+            {
+                var speed_multiple = GameManager.Instance.GetSkillEffect("movespeed");
+                dir += dir * speed_multiple;
+            }
+
+            _controller.Move(dir);
         }
     }
 
