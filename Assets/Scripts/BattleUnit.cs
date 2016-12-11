@@ -6,6 +6,8 @@ public class BattleUnit : MonoBehaviour
 {
     public GameObject _bodyPrefab;
     public float _bodyFadeTime = 0;
+    public string _explosionAudioName;
+    public string _explosionEffectName;
 
     public float MaxHP;
 
@@ -36,6 +38,16 @@ public class BattleUnit : MonoBehaviour
 
         if (HP <= 0)
         {
+            if (!string.IsNullOrEmpty(_explosionEffectName))
+            {
+                Messenger.Broadcast<string, Vector3>("PlayEffect", _explosionEffectName, transform.position);
+            }
+
+            if (!string.IsNullOrEmpty(_explosionAudioName))
+            {
+                Messenger.Broadcast<string, Vector3>("PlaySfx", _explosionAudioName, transform.position);
+            }
+
             Messenger.Broadcast<BattleUnit>("CreateBody", this);
             Destroy(gameObject);
         }
