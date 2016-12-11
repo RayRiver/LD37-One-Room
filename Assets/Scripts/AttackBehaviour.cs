@@ -7,6 +7,7 @@ public class AttackBehaviour : MonoBehaviour
 {
     public Transform _gunPoint;
     public GameObject _bulletPrefab;
+    public AudioSource _audioSource;
 
     private BattleUnit _unit;
 
@@ -24,6 +25,11 @@ public class AttackBehaviour : MonoBehaviour
         {
             com.Owner = _unit;
             com.Direction = Vector2.up;
+        }
+
+        if (_audioSource != null)
+        {
+            _audioSource.Play();
         }
     }
 }
