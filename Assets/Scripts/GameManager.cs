@@ -209,14 +209,12 @@ public class GameManager : Singleton<GameManager>
         Waves = new WaveProcess[]
         {
             Wave1,
-            /*
             Wave2,
             Wave3,
             Wave4,
             Wave5,
             Wave6,
             Wave7,
-            */
         };
 
         _skillLevels = new Dictionary<string, int>();
