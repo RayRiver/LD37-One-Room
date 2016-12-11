@@ -36,6 +36,167 @@ public class GameManager : Singleton<GameManager>
     public delegate IEnumerator WaveProcess();
     private WaveProcess[] Waves;
 
+    IEnumerator Wave1()
+    {
+        yield return new WaitForSeconds(2);
+
+        _enemySpawner.CreateEnemy("Enemy", "LeftTop");
+        _enemySpawner.CreateEnemy("Enemy", "LeftBottom");
+        _enemySpawner.CreateEnemy("Enemy", "RightTop");
+        _enemySpawner.CreateEnemy("Enemy", "RightBottom");
+
+        yield return new WaitForSeconds(6);
+
+        _enemySpawner.CreateEnemy("Enemy", "Top");
+        _enemySpawner.CreateEnemy("Enemy", "Bottom");
+        _enemySpawner.CreateEnemy("Enemy", "Left");
+        _enemySpawner.CreateEnemy("Enemy", "Right");
+
+        yield return new WaitForSeconds(3);
+    }
+
+    IEnumerator Wave2()
+    {
+        yield return new WaitForSeconds(3);
+
+        _enemySpawner.CreateEnemy("Enemy", "Top");
+        _enemySpawner.CreateEnemy("Enemy", "Bottom");
+        _enemySpawner.CreateEnemy("Enemy", "Left");
+        _enemySpawner.CreateEnemy("Enemy", "Right");
+        _enemySpawner.CreateEnemy("Enemy2", "Left");
+
+        yield return new WaitForSeconds(8);
+
+        _enemySpawner.CreateEnemy("Enemy", "LeftTop");
+        _enemySpawner.CreateEnemy("Enemy", "LeftBottom");
+        _enemySpawner.CreateEnemy("Enemy", "RightTop");
+        _enemySpawner.CreateEnemy("Enemy", "RightBottom");
+        _enemySpawner.CreateEnemy("Enemy2", "Right");
+
+        yield return new WaitForSeconds(3);
+    }
+
+    IEnumerator Wave3()
+    {
+        yield return new WaitForSeconds(3);
+
+        _enemySpawner.CreateEnemy("Enemy", "Top");
+        _enemySpawner.CreateEnemy("Enemy", "LeftTop");
+        _enemySpawner.CreateEnemy("Enemy", "Left");
+        _enemySpawner.CreateEnemy("Enemy2", "RightBottom");
+        _enemySpawner.CreateEnemy("Enemy2", "Right");
+
+        yield return new WaitForSeconds(12);
+
+        _enemySpawner.CreateEnemy("Enemy", "Bottom");
+        _enemySpawner.CreateEnemy("Enemy", "RightBottom");
+        _enemySpawner.CreateEnemy("Enemy", "Right");
+        _enemySpawner.CreateEnemy("Enemy2", "LeftTop");
+        _enemySpawner.CreateEnemy("Enemy2", "Left");
+
+        yield return new WaitForSeconds(3);
+    }
+
+    IEnumerator Wave4()
+    {
+        yield return new WaitForSeconds(4);
+
+        _enemySpawner.CreateEnemy("Enemy", "Bottom");
+        _enemySpawner.CreateEnemy("Enemy", "RightBottom");
+        _enemySpawner.CreateEnemy("Enemy", "Right");
+        _enemySpawner.CreateEnemy("Enemy2", "LeftTop");
+        _enemySpawner.CreateEnemy("Enemy2", "Left");
+
+        yield return new WaitForSeconds(9);
+
+        _enemySpawner.CreateEnemy("Enemy", "Top");
+        _enemySpawner.CreateEnemy("Enemy", "LeftTop");
+        _enemySpawner.CreateEnemy("Enemy", "Left");
+        _enemySpawner.CreateEnemy("Enemy2", "RightBottom");
+        _enemySpawner.CreateEnemy("Enemy2", "Right");
+
+        yield return new WaitForSeconds(4);
+    }
+
+    IEnumerator Wave5()
+    {
+        yield return new WaitForSeconds(4);
+
+        _enemySpawner.CreateEnemy("Enemy", "Center");
+        _enemySpawner.CreateEnemy("Enemy", "CenterLeft");
+        _enemySpawner.CreateEnemy("Enemy", "CenterRight");
+
+        yield return new WaitForSeconds(5);
+
+        _enemySpawner.CreateEnemy("Enemy2", "Top");
+        _enemySpawner.CreateEnemy("Enemy2", "Bottom");
+        _enemySpawner.CreateEnemy("Enemy2", "Left");
+        _enemySpawner.CreateEnemy("Enemy2", "Right");
+
+        yield return new WaitForSeconds(6);
+
+        _enemySpawner.CreateEnemy("Enemy2", "RightTop");
+        _enemySpawner.CreateEnemy("Enemy2", "LeftBottom");
+
+        yield return new WaitForSeconds(4);
+    }
+
+    IEnumerator Wave6()
+    {
+        yield return new WaitForSeconds(4);
+
+        _enemySpawner.CreateEnemy("Enemy", "Center");
+
+        yield return new WaitForSeconds(2);
+
+        _enemySpawner.CreateEnemy("Enemy2", "Left");
+        _enemySpawner.CreateEnemy("Enemy2", "Right");
+
+        yield return new WaitForSeconds(2);
+
+        _enemySpawner.CreateEnemy("Enemy2", "Left");
+        _enemySpawner.CreateEnemy("Enemy2", "Right");
+
+        yield return new WaitForSeconds(2);
+
+        _enemySpawner.CreateEnemy("Enemy2", "Top");
+        _enemySpawner.CreateEnemy("Enemy2", "Bottom");
+
+        yield return new WaitForSeconds(2);
+
+        _enemySpawner.CreateEnemy("Enemy2", "Top");
+        _enemySpawner.CreateEnemy("Enemy2", "Bottom");
+
+        yield return new WaitForSeconds(2);
+
+        _enemySpawner.CreateEnemy("Enemy2", "Center");
+        _enemySpawner.CreateEnemy("Enemy2", "CenterLeft");
+        _enemySpawner.CreateEnemy("Enemy2", "CenterRight");
+
+        yield return new WaitForSeconds(4);
+    }
+
+    IEnumerator Wave7()
+    {
+        yield return new WaitForSeconds(5);
+
+        _enemySpawner.CreateEnemy("Enemy", "CenterLeft");
+        _enemySpawner.CreateEnemy("Enemy", "CenterRight");
+
+        yield return new WaitForSeconds(2);
+
+        _enemySpawner.CreateEnemy("Enemy2", "LeftTop");
+        _enemySpawner.CreateEnemy("Enemy2", "RightTop");
+        _enemySpawner.CreateEnemy("Enemy2", "LeftBottom");
+        _enemySpawner.CreateEnemy("Enemy2", "RightBottom");
+
+        yield return new WaitForSeconds(3);
+
+        _enemySpawner.CreateEnemy("Enemy3", "Center");
+
+        yield return new WaitForSeconds(5);
+    }
+
     void Awake()
     {
         Messenger.AddListener("PlayerDead", OnPlayerDead);
@@ -48,8 +209,12 @@ public class GameManager : Singleton<GameManager>
         Waves = new WaveProcess[]
         {
             Wave1,
-            Wave1,
-            Wave1,
+            Wave2,
+            Wave3,
+            Wave4,
+            Wave5,
+            Wave6,
+            Wave7,
         };
 
         _skillLevels = new Dictionary<string, int>();
@@ -168,25 +333,6 @@ public class GameManager : Singleton<GameManager>
         {
             _wave++;
         }
-    }
-
-    IEnumerator Wave1()
-    {
-        yield return new WaitForSeconds(1);
-
-        _enemySpawner.CreateEnemy("Enemy", "LeftTop");
-        _enemySpawner.CreateEnemy("Enemy", "LeftBottom");
-        _enemySpawner.CreateEnemy("Enemy", "RightTop");
-        _enemySpawner.CreateEnemy("Enemy", "RightBottom");
-
-        yield return new WaitForSeconds(1);
-
-        _enemySpawner.CreateEnemy("Enemy", "LeftTop");
-        _enemySpawner.CreateEnemy("Enemy", "LeftBottom");
-        _enemySpawner.CreateEnemy("Enemy", "RightTop");
-        _enemySpawner.CreateEnemy("Enemy", "RightBottom");
-
-        yield return new WaitForSeconds(1);
     }
 
     IEnumerator GameLoop()
