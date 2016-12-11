@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BattleUnit))]
 public class AttackBehaviour : MonoBehaviour
 {
-    public Transform _gunPoint;
+    public Transform[] _gunPoints;
     public GameObject _bulletPrefab;
 
     private BattleUnit _unit;
@@ -17,23 +17,35 @@ public class AttackBehaviour : MonoBehaviour
 
     public void Attack()
     {
-        var bullet = Instantiate(_bulletPrefab, _gunPoint.position, _gunPoint.rotation) as GameObject;
-
-        if (tag == "Player")
+        foreach (var _gunPoint in _gunPoints)
         {
-            float multiple = 1 + GameManager.Instance.GetSkillEffect("power");
-            var scale = bullet.transform.localScale;
-            bullet.transform.localScale = new Vector3(scale.x * multiple, scale.y * multiple, scale.z);
-        }
+            var bullet = Instantiate(_bulletPrefab, _gunPoint.position, _gunPoint.rotation) as GameObject;
 
-        var com = bullet.GetComponent<BulletBehaviour>();
-        if (com != null)
-        {
-            com.OwnerTag = _unit.tag;
-            com.OwnerAtk = _unit.Atk;
-            com.Direction = Vector2.up;
-        }
+            if (tag == "Player")
+            {
+                float multiple = 1 + GameManager.Instance.GetSkillEffect("power");
+                var scale = bullet.transform.localScale;
+                bullet.transform.localScale = new Vector3(scale.x * multiple, scale.y * multiple, scale.z);
+            }
 
-        Messenger.Broadcast<string, Vector3>("PlaySfx", "Laser", _gunPoint.position);
+            var com = bullet.GetComponent<BulletBehaviour>();
+            if (com != null)
+            {
+                com.OwnerTag = _unit.tag;
+                com.OwnerAtk = _unit.Atk;
+                com.Direction = Vector2.up;
+            }
+
+            string audioName = "";
+            if (tag == "Player")
+            {
+                audioName = "Laser";
+            }
+            else
+            {
+                audioName = "Laser2";
+            }
+            Messenger.Broadcast<string, Vector3>("PlaySfx", audioName, _gunPoint.position);
+        }
     }
 }

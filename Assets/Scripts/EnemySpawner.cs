@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject _enemyPrefab;
+    public GameObject[] _enemyPrefabs;
+
+    private GameUtil.PrefabParamDict _enemyPrefabDict;
 
     private Transform _enemies;
     private Transform _points;
@@ -13,6 +15,8 @@ public class EnemySpawner : MonoBehaviour
 
     void Awake()
     {
+        _enemyPrefabDict = new GameUtil.PrefabParamDict(_enemyPrefabs);
+
         _enemies = transform.FindChild("Enemies");
         _points = transform.FindChild("Points");
 
@@ -26,11 +30,15 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public void CreateEnemy(string pointName = null)
+    public void CreateEnemy(string enemyName, string pointName = null)
     {
-        var go = Instantiate(_enemyPrefab);
+        GameObject prefab = null;
+        var prefabExists = _enemyPrefabDict.TryGetValue(enemyName, out prefab);
+        if (!prefabExists) return;
+
+        var go = Instantiate(prefab);
         go.transform.parent = _enemies;
-        go.name = "Enemy";
+        go.name = enemyName;
 
         if (pointName != null)
         {

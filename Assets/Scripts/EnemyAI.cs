@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    public float _shootCD = 1;
+
+    private float _shootTimer = 0;
 
     private AttackBehaviour _attackBehaviour;
     private ObjectMovement _objectMovement;
@@ -54,9 +57,6 @@ public class EnemyAI : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
-
-    private float _shootCD = 1;
-    private float _shootTimer = 0;
 
     void Update()
     {
