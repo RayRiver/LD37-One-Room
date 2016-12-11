@@ -209,12 +209,14 @@ public class GameManager : Singleton<GameManager>
         Waves = new WaveProcess[]
         {
             Wave1,
+            /*
             Wave2,
             Wave3,
             Wave4,
             Wave5,
             Wave6,
             Wave7,
+            */
         };
 
         _skillLevels = new Dictionary<string, int>();
@@ -234,8 +236,16 @@ public class GameManager : Singleton<GameManager>
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SceneManager.LoadScene("Game");
-                return;
+                if (_win)
+                {
+                    SceneManager.LoadScene("Title");
+                    return;
+                }
+                else
+                {
+                    SceneManager.LoadScene("Game");
+                    return;
+                }
             }
         }
     }
@@ -358,6 +368,12 @@ public class GameManager : Singleton<GameManager>
         _gameOver = false;
         while (!_gameOver)
         {
+            if (_nextWave >= Waves.Length)
+            {
+                yield return new WaitForEndOfFrame();
+                continue;
+            }
+
             if (_nextWave > _wave)
             {
                 _wave = _nextWave;

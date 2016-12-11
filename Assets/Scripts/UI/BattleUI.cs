@@ -105,6 +105,8 @@ public class BattleUI : MonoBehaviour
 
     void OnGameResult(bool win)
     {
+        Camera.main.GetComponent<UnityStandardAssets.ImageEffects.BlurOptimized>().enabled = true;
+
         if (_resultLayer != null)
         {
             _resultLayer.SetActive(true);
