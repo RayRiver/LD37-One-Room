@@ -16,6 +16,7 @@ public class BattleUI : MonoBehaviour
     public Button _skill1Button;
     public Button _skill2Button;
     public Button _skill3Button;
+    public Button _skill4Button;
 
     void Start()
     {
@@ -38,6 +39,11 @@ public class BattleUI : MonoBehaviour
     public void OnSkill3ButtonClicked()
     {
         Messenger.Broadcast<string>("SkillLevelUp", "power");
+    }
+
+    public void OnSkill4ButtonClicked()
+    {
+        Messenger.Broadcast<string>("SkillLevelUp", "shootspeed");
     }
 
     void OnUIUpdateGears(int gears)
@@ -70,6 +76,10 @@ public class BattleUI : MonoBehaviour
         else if (skill.id == "power")
         {
             button = _skill3Button;
+        }
+        else if (skill.id == "shootspeed")
+        {
+            button = _skill4Button;
         }
 
         if (button != null)
