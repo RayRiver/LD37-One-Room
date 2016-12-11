@@ -81,9 +81,63 @@ public class BattleUnit : MonoBehaviour
         return _bodyFadeTime;
     }
 
+    private bool _hurt = false;
+    private Color _hurtColor;
+    private float _hurtRecoverTime = 2f;
+    private float _hurtRecoverTimer = 0;
+    void Update()
+    {
+        if (_hurt)
+        {
+            _hurtRecoverTimer += Time.deltaTime;
+            if (_hurtRecoverTimer >= _hurtRecoverTime)
+            {
+                _hurt = false;
+                _hurtRecoverTimer = 0;
+            }
+            else
+            {
+                Renderer[] renderers = GetComponentsInChildren<Renderer>();
+                if (renderers != null)
+                {
+                    foreach (var renderer in renderers)
+                    {
+                        var color = Color.Lerp(renderer.material.color, Color.white, Mathf.Clamp01(_hurtRecoverTimer / _hurtRecoverTime));
+                        renderer.material.color = color;
+                    }
+                }
+            }
+        }
+    }
+
     public void Hurt(string ownerTag, float atk)
     {
         HP -= atk;
+
+        if (tag == "Player")
+        {
+            _hurtColor = Color.red;
+        }
+        else if (tag == "Enemy")
+        {
+            _hurtColor = Color.red;
+        }
+        else
+        {
+            _hurtColor = Color.red;
+        }
+
+        // hurt color;
+        _hurt = true;
+        _hurtRecoverTimer = 0;
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        if (renderers != null)
+        {
+            foreach (var renderer in renderers)
+            {
+                renderer.material.color = _hurtColor;
+            }
+        }
 
         if (HP <= 0)
         {
@@ -95,7 +149,7 @@ public class BattleUnit : MonoBehaviour
             if (!string.IsNullOrEmpty(_explosionAudioName))
             {
                 Messenger.Broadcast<string, Vector3>("PlaySfx", _explosionAudioName, transform.position);
-                Messenger.Broadcast<float, float>("CameraShake", 0.05f, 0.2f);
+                Messenger.Broadcast<float, float>("CameraShake", 0.04f, 0.2f);
             }
 
             // create drop item;
@@ -124,7 +178,7 @@ public class BattleUnit : MonoBehaviour
         if (tag == "Player")
         {
             Messenger.Broadcast<float, float>("UIUpdateHealth", HP, MaxHP);
-            Messenger.Broadcast<float, float>("CameraShake", 0.03f, 0.2f);
+            Messenger.Broadcast<float, float>("CameraShake", 0.07f, 0.25f);
         }
     }
 }
