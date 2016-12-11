@@ -23,7 +23,6 @@ public class BattleUnit : MonoBehaviour
     [HideInInspector]
     public float HP;
 
-    [HideInInspector]
     public float Atk = 1;
 
     void Awake()
@@ -102,9 +101,9 @@ public class BattleUnit : MonoBehaviour
             // create drop item;
             if (_dropItems != null)
             {
-                float n = Random.Range(0, 1);
                 foreach (var item in _dropItems)
                 {
+                    float n = Random.Range(0.0f, 1.0f);
                     if (n < item.rate)
                     {
                         Messenger.Broadcast<string, Vector3>("DropItem", item.id, transform.position);
