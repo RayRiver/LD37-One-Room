@@ -25,10 +25,12 @@ public class ObjectMovement : MonoBehaviour
 
     private Controller2D _controller;
     private Vector2 _velocity;
+    private BulletBehaviour _bulletBehaviour;
 
     void Start()
     {
         _controller = GetComponent<Controller2D>();
+        _bulletBehaviour = GetComponent<BulletBehaviour>();
     }
 
     void Update()
@@ -45,6 +47,16 @@ public class ObjectMovement : MonoBehaviour
             {
                 var speed_multiple = GameManager.Instance.GetSkillEffect("movespeed");
                 dir += dir * speed_multiple;
+            }
+            else if (tag == "Bullet")
+            {
+                if (_bulletBehaviour != null)
+                {
+                    if (_bulletBehaviour.OwnerTag == "Player")
+                    {
+                        dir += dir * GameManager.Instance.GetSkillEffect("power");
+                    }
+                }
             }
 
             _controller.Move(dir);
