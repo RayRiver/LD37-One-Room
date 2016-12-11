@@ -174,17 +174,17 @@ public class GameManager : Singleton<GameManager>
     {
         yield return new WaitForSeconds(1);
 
-        _enemySpawner.CreateEnemy("Enemy2", "LeftTop");
-        _enemySpawner.CreateEnemy("Enemy2", "LeftBottom");
-        _enemySpawner.CreateEnemy("Enemy2", "RightTop");
-        _enemySpawner.CreateEnemy("Enemy2", "RightBottom");
+        _enemySpawner.CreateEnemy("Enemy", "LeftTop");
+        _enemySpawner.CreateEnemy("Enemy", "LeftBottom");
+        _enemySpawner.CreateEnemy("Enemy", "RightTop");
+        _enemySpawner.CreateEnemy("Enemy", "RightBottom");
 
         yield return new WaitForSeconds(1);
 
-        _enemySpawner.CreateEnemy("Enemy2", "LeftTop");
-        _enemySpawner.CreateEnemy("Enemy2", "LeftBottom");
-        _enemySpawner.CreateEnemy("Enemy2", "RightTop");
-        _enemySpawner.CreateEnemy("Enemy2", "RightBottom");
+        _enemySpawner.CreateEnemy("Enemy", "LeftTop");
+        _enemySpawner.CreateEnemy("Enemy", "LeftBottom");
+        _enemySpawner.CreateEnemy("Enemy", "RightTop");
+        _enemySpawner.CreateEnemy("Enemy", "RightBottom");
 
         yield return new WaitForSeconds(1);
     }
