@@ -27,8 +27,12 @@ public class BattleUI : MonoBehaviour
 
     public void OnSkill1ButtonClicked()
     {
-        Debug.Log("skill level up");
         Messenger.Broadcast<string>("SkillLevelUp", "movespeed");
+    }
+
+    public void OnSkill2ButtonClicked()
+    {
+        Messenger.Broadcast<string>("SkillLevelUp", "maxhp");
     }
 
     void OnUIUpdateGears(int gears)
@@ -53,6 +57,10 @@ public class BattleUI : MonoBehaviour
         if (skill.id == "movespeed")
         {
             button = _skill1Button;
+        }
+        else if (skill.id == "maxhp")
+        {
+            button = _skill2Button;
         }
 
         if (button != null)

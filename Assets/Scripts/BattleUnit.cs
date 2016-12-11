@@ -33,6 +33,7 @@ public class BattleUnit : MonoBehaviour
         if (tag == "Player")
         {
             Messenger.AddListener("GetHeart", OnGetHeart);
+            Messenger.AddListener<string, float>("SkillLevelUpFinished", OnSkillLevelUpFinished);
         }
     }
 
@@ -55,6 +56,19 @@ public class BattleUnit : MonoBehaviour
             }
 
             Messenger.Broadcast<float, float>("UIUpdateHealth", HP, MaxHP);
+        }
+    }
+
+    void OnSkillLevelUpFinished(string id, float effect)
+    {
+        if (tag == "Player")
+        {
+            if (id == "maxhp")
+            {
+                MaxHP += effect;
+                HP = MaxHP;
+                Messenger.Broadcast<float, float>("UIUpdateHealth", HP, MaxHP);
+            }
         }
     }
 
