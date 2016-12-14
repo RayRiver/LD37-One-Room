@@ -1,6 +1,6 @@
 # LD37-One-Room
 
-## Ludum Dare Preview
+## LudumDare Page
 http://ludumdare.com/compo/ludum-dare-37/?action=preview&uid=70881
 
 ## WebGL Preview
